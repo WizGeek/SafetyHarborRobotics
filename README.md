@@ -1,4 +1,7 @@
-SHMSRobotics
+Safety Harbor Robotics
 ============
+Welcome!
 
-Safety Harbor Middle School Robotics
+This repository services:
+TurtleBots - Safety Harbor Elementary School Robotics
+HawkBotics -  Safety Harbor Middle School Robotics
