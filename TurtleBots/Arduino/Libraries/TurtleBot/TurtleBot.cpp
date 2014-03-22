@@ -81,7 +81,7 @@ TurtleBot& TurtleBot::turnLeft() {	// 90 degrees
 }
 
 TurtleBot& TurtleBot::turnLeft(const float degrees) {
-	steer(SteerTurnLEFT);
+	steer(degrees < 0.0? SteerTurnRIGHT : SteerTurnLEFT);
 	engage(getRevsForDegrees(degrees));
 	return *this;
 }
@@ -92,7 +92,7 @@ TurtleBot& TurtleBot::spinLeft() {  // 90 degrees
 }
 
 TurtleBot& TurtleBot::spinLeft(const float degrees) {
-	steer(SteerSpinLEFT);
+	steer(degrees < 0.0? SteerSpinRIGHT : SteerSpinLEFT);
 	engage(getRevsForDegrees(degrees));
 	return *this;
 }
@@ -106,7 +106,7 @@ TurtleBot& TurtleBot::turnRight() {   // 90 degrees
  * turnRight() - spins in place clockwise approximately the number of degrees specified.
  */
 TurtleBot& TurtleBot::turnRight(const float degrees) {
-	steer(SteerTurnRIGHT);
+	steer(degrees < 0.0? SteerTurnLEFT : SteerTurnRIGHT);
 	engage(getRevsForDegrees(degrees));
 	return *this;
 }
@@ -120,7 +120,7 @@ TurtleBot& TurtleBot::spinRight() { // 90 degrees
 }
 
 TurtleBot& TurtleBot::spinRight(const float degrees) {
-	steer(SteerSpinRIGHT);
+	steer(degrees < 0.0? SteerSpinLEFT : SteerSpinRIGHT);
 	engage(getRevsForDegrees(degrees));
 	return *this;
 }
@@ -161,8 +161,8 @@ void TurtleBot::engage(const float revolutions) {
 		left.attach(leftMotorPin);
 	if (!right.attached())
 		right.attach(rightMotorPin);
-	left.writeMicroseconds(leftPwm);
-	right.writeMicroseconds(rightPwm);
+	left.writeMicroseconds(finalLeftPwm);
+	right.writeMicroseconds(finalRightPwm);
 
 	delay(getMsForRevolutions(revolutions));
 	stop();
